@@ -4,7 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the main index.")
-
+    return render(request, 'index.html')
+    
 def menu(request):
-    return HttpResponse("This is the menu page.")
+    return render(request, 'menu.html')
