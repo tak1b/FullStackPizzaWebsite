@@ -16,6 +16,7 @@ body {
     width: 100vw;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 header {
@@ -98,6 +99,64 @@ header {
 
 .btn:hover {
     background-color: #c9302c;
+}
+
+.form-container {
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 80px auto;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+.form-container h1 {
+    text-align: center;
+    color: #ffcc00;
+    font-size: 2em;
+}
+
+.form-container label {
+    font-size: 1.2em;
+    color: white;
+    display: block;
+    margin-top: 10px;
+}
+
+.form-container input[type="text"], 
+.form-container input[type="email"], 
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #333;
+    color: white;
+    font-size: 1em;
+}
+
+.form-container .btn-submit {
+    width: 100%;
+    background-color: #d9534f;
+    border: none;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.form-container .btn-submit:hover {
+    background-color: #c9302c;
+}
+
+.form-container ul {
+    margin-top: 10px;
+    color: #ffcc00;
+    font-size: 0.9em;
 }
 
 footer {
