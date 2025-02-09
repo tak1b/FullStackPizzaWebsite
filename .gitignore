@@ -1,4 +1,5 @@
 # To not push unnecessary files to GitHub
 __pycache__
 *.pyc
+/venv/
 venv/
