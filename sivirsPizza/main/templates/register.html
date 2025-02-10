@@ -1,4 +1,6 @@
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +19,7 @@
                     {{ form.as_p }}
             </div>
 
+<<<<<<< HEAD
             <div class="register-side-box-container">
                 <div class="register-side-box">
                     <div>
@@ -30,6 +33,23 @@
             </div>
         </div>
     </form>
+=======
+    <div class="home-button">
+        <a href="{% url 'index' %}" class="btn-home">Home</a>
+    </div>
+
+    <div class="form-container">
+        <h1>Register</h1>
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-submit">Register</button>
+        </form>
+
+        <p class="redirect-text">Already have an account? <a href="{% url 'login' %}" class="redirect-link">Login here</a></p>
+    </div>
+
+>>>>>>> 8dee428 (text box for register)
 </body>
 
 </html>
