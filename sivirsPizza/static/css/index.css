@@ -11,99 +11,41 @@ a {
     text-decoration: none;
 }
 
+/* Body Styling */
 body {
     background-color: #000;
     color: #fff;
-}
-
-.container {
-    width: 100vw;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.main-page-header {
-    width: 100%;
-    height: 0vh;
-
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    opacity: 0;
-
-    animation: reveal-nav-bar  1s forwards;
+    min-height: 100vh;
 }
 
-@keyframes reveal-nav-bar {
-    0% {
-        height: 0vh;
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-        height: 8vh;
-    }
+/* Home Button */
+.home-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
-.main-page-header-content{
-    font-size: 150%;
-    font-weight: 500;
-}
-
-.main-page-menu {
-    width: 35vw;
-    height: 92vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-page-menu-contents {
-    width: 100%;
-    height: auto;
-}
-
-.main-page-menu-contents-item {
-    width: 80%;
-    height: 8vh;
-
+.btn-home {
+    background-color: #9966ff;
     color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
     text-decoration: none;
-
-    font-size: 150%;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-
-    margin-left: 5%;
-    opacity: 0;
-
-    transition:  all 0.1s ease-in-out;
-
-    animation: reveal-menu-item 1s forwards;
+    font-size: 1em;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-.main-page-menu-contents-item:hover {
-    font-size: 165%;
+.btn-home:hover {
+    background-color: #6633cc;
+    box-shadow: 0px 0px 10px rgba(102, 51, 204, 0.8);
 }
 
-.main-page-menu-contents-item a {
-    color: white;
-}
-
-@keyframes reveal-menu-item {
-    0% {
-        opacity: 0;
-        transform: translateX(-10%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
+/* Main Page Header */
 header {
     background-color: #111;
     padding: 15px 0;
@@ -118,6 +60,7 @@ header {
     z-index: 1000;
 }
 
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -147,6 +90,7 @@ header {
     color: #ffcc00;
 }
 
+/* Hero Section */
 .hero {
     text-align: center;
     padding: 100px 20px;
@@ -169,23 +113,88 @@ header {
     margin: 10px 0;
 }
 
-.btn {
-    display: inline-block;
-    padding: 15px 30px;
-    background-color: #d9534f;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 10px;
-    font-size: 1.5em;
-    margin-top: 15px;
+/* Form Container */
+.form-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 12px;
+    width: 360px;
+    box-shadow: 0px 4px 12px rgba(153, 102, 255, 0.3);
+    text-align: center;
+}
+
+.form-container h1 {
+    color: #6633cc;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #9966ff;
+    background: rgba(240, 248, 255, 0.8);
+    font-size: 1em;
+    margin-bottom: 15px;
+    outline: none;
     transition: 0.3s;
 }
 
-.btn:hover {
-    background-color: #c9302c;
+.form-container input:focus {
+    border-color: #6633cc;
+    box-shadow: 0 0 8px rgba(102, 51, 204, 0.4);
 }
 
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    background-color: #9966ff;
+    border: none;
+    color: white;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #6633cc;
+    box-shadow: 0px 0px 10px rgba(102, 51, 204, 0.8);
+}
+
+/* Redirect Text */
+.redirect-text {
+    margin-top: 15px;
+    font-size: 1em;
+    color: #5522aa;
+}
+
+.redirect-text a {
+    color: #6633cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.redirect-text a:hover {
+    text-decoration: underline;
+}
+
+/* Animation */
+@keyframes reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer */
 footer {
     text-align: center;
     padding: 20px;
