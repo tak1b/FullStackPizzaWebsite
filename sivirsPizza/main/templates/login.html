@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+
+<body>
+    <form method="POST" class="form-group">
+        <div class="register-container">
+            <div class="form-container">
+                <h1>Login</h1>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+            </div>
+    
+            <div class="register-side-box-container">
+                <div class="register-side-box">
+                    <div>
+                        <button type="submit" class="btn-submit">Login</button>
+        
+                        <div style="margin-top: 10%;">
+                            <p class="redirect-text">Don't have an account? <a href="{% url 'register' %}" class="redirect-link">Register here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -14,6 +14,34 @@
     </div>
 
     <div class="main-page-container">
+
+        {% if user.is_authenticated %}
+
+        <div class="main-page-menu">
+            <div class="main-page-menu-contents">
+                <div class="main-page-menu-contents-item" style="animation-delay: 1s;">
+                    <a href="/">Home</a>
+                </div>
+                <div class="main-page-menu-contents-item" style="animation-delay: 1.2s;">
+                    <a href="/menu">Menu</a>
+                </div>
+                <div class="main-page-menu-contents-item" style="animation-delay: 1.4s;">
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="main-page-menu-contents-item" style="animation-delay: 1.6s;">
+                    <a href="/order">Order</a>
+                </div>
+                <div class="main-page-menu-contents-item" style="animation-delay: 1.8s;">
+                    <a href="/logout">Logout</a>
+                </div>
+                <div class="main-page-menu-contents-item" style="animation-delay: 2s;">
+                    Logged in as {{ user.username }}
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+
         <div class="main-page-menu">
             <div class="main-page-menu-contents">
                 <div class="main-page-menu-contents-item" style="animation-delay: 1s;">
@@ -33,6 +61,8 @@
                 </div>
             </div>
         </div>
+
+        {% endif %}
 
         <div class="main-page-image-container">
             <img src="/static/images/sivir.png" />

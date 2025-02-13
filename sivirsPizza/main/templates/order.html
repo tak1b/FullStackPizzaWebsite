@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Making Pizza</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6978/6978255.png">
+    <link rel="stylesheet" href="static/css/order.css">
+
+    <!-- ############## Font Choices from Google ########################## -->
+
+    <!-- ##### LIBRE FRANKLIN #####  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Roboto:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    {% include 'base.html' %}
+    
+    {% block content %}
+        <div class="order-container">
+            <div class="order-box">
+                <div class="centerBoxTitle">
+                    <h1>
+                        Sivirs Pizza
+                    </h1>
+                    <br>
+                    <section>
+                        Create a pizza
+                    </section>
+                </div>
+
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h3>
+                        Pizza Base
+                    </h3>
+                    <p>Size: {{ form.size }}</p>
+                    <p>Crust: {{ form.crust }}</p>
+                    <p>Sauce: {{ form.sauce }}</p>
+                    <p>Cheese: {{ form.cheese }}</p>
+                    <h3>
+                        Pizza Toppings
+
+                    <div class="toppings-list">
+                        <p>Toppings: {{ form.toppings }}</p>
+                    </div>
+                    <button type="submit" class="create-pizza">Create Pizza</button>
+
+                </form>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+
+</html>
