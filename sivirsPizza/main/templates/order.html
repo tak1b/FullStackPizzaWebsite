@@ -31,25 +31,53 @@
             <div class="order-box">
                 <div class="centerBoxTitle">
                     <h1>
-                        Sivirs Pizza
-                    </h1>
-                    <br>
-                    <section>
                         Create a pizza
-                    </section>
+                    </h1>
                 </div>
 
                 <form action="" method="post">
                     {% csrf_token %}
-                    <h3>
-                        Pizza Base
-                    </h3>
-                    <p>Size: {{ form.size }}</p>
-                    <p>Crust: {{ form.crust }}</p>
-                    <p>Sauce: {{ form.sauce }}</p>
-                    <p>Cheese: {{ form.cheese }}</p>
-                    <h3>
-                        Pizza Toppings
+
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            Size:
+                        </div>
+                        <div class="delivery-box-text-box">
+                            {{ form.size }}
+                        </div>
+                    </div>
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            Crust:
+                        </div>
+                        <div class="delivery-box-text-box">
+                            {{ form.crust }}
+                        </div>
+                    </div>
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            Sauce:
+                        </div>
+                        <div class="delivery-box-text-box">
+                            {{ form.sauce }}
+                        </div>
+                    </div>
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            Cheese:
+                        </div>
+                        <div class="delivery-box-text-box">
+                            {{ form.cheese }}
+                        </div>
+                    </div>
 
                     <div class="toppings-list">
                         <p>Toppings: {{ form.toppings }}</p>

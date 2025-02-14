@@ -31,36 +31,75 @@
     {% block content %}
         <div class="order-container">
             <div class="order-box">
-                <h2>Delivery Information</h2>
-                <form method="POST">
+                <h1>
+                    Delivery Information
+                </h1>
+                <br>
+
+                <form action="" method="post">
                     {% csrf_token %}
-                    <div class="form-group">
-                        {{ form.name.label_tag }}
-                        {{ form.name }}
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            {{ form.name.label_tag }}
+                        </div>
+                        <div class="delivery-box-text-box">
+                            {{ form.name }}
+                        </div>
                     </div>
-                    <div class="form-group">
-                        {{ form.address.label_tag }}
-                        {{ form.address }}
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            {{ form.address.label_tag }}
+                        </div>
+                        <div class="delivery-box-text-box">
+                            {{ form.address }}
+                        </div>
                     </div>
-                    <div class="form-group">
-                        {{ form.cardNo.label_tag }}
-                        {{ form.cardNo }}
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            Card No:
+                        </div>
+                        <div class="delivery-box-text-box">
+                            {{ form.cardNo }}
+                        </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            {{ form.expMonth.label_tag }}
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            Exp. Mon: 
+                        </div>
+                        <div class="delivery-box-text-box">
                             {{ form.expMonth }}
                         </div>
-                        <div class="form-group col-md-4">
-                            {{ form.expYear.label_tag }}
+                    </div>
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            Exp. Year:
+                        </div>
+                        <div class="delivery-box-text-box">
                             {{ form.expYear }}
                         </div>
-                        <div class="form-group col-md-4">
-                            {{ form.cvv.label_tag }}
+                    </div>
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-box-name">
+                            Sec. No. 
+                        </div>
+                        <div class="delivery-box-text-box">
                             {{ form.cvv }}
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Order</button>
+
+                    <button type="submit" class="submit-button">Create Pizza</button>
                 </form>
             </div>
         </div>

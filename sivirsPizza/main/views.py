@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import AuthenticationForm  # Add this import
+from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from main.forms import *
@@ -47,7 +48,7 @@ def log_out(request):
     logout(request)
     return redirect("/")
 
-# @login_required(login_url='index') #redirect when user is not logged in
+@login_required(login_url='/login') 
 def order(request):
     toppings = PizzaTopping.objects.all()
 
@@ -58,7 +59,7 @@ def order(request):
             pizza = form.save(commit=False)
             pizza.author = request.user
             pizza.save()
-            # Store pizza_id in session for delivery connection
+
             request.session['pending_pizza_id'] = pizza.id
             return redirect('/delivery')
         else:
@@ -68,8 +69,8 @@ def order(request):
         form = PizzaForm()
         return render(request, 'order.html', {'form': form, "toppings": toppings})
 
+@login_required(login_url='/login') 
 def delivery_page(request):
-    # Check if there's a pending pizza order
     pizza_id = request.session.get('pending_pizza_id')
     if not pizza_id:
         messages.error(request, "Please create a pizza order first")
@@ -81,12 +82,10 @@ def delivery_page(request):
             delivery = form.save(commit=False)
             delivery.author = request.user
             
-            # Connect the pizza to this delivery
             pizza = Pizza.objects.get(id=pizza_id)
             delivery.pizza = pizza
             delivery.save()
             
-            # Clear the pending pizza from session
             del request.session['pending_pizza_id']
             
             messages.success(request, "Your pizza order has been placed successfully!")
@@ -96,7 +95,7 @@ def delivery_page(request):
     
     return render(request, 'delivery.html', {'form': form})
 
+@login_required(login_url='/login') 
 def my_orders(request):
-    # Get all deliveries for the current user
     deliveries = Delivery.objects.filter(author=request.user).select_related('pizza')
     return render(request, 'my_orders.html', {'deliveries': deliveries})

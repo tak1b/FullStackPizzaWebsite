@@ -20,13 +20,18 @@ class RegisterForm(UserCreationForm):
 class PizzaForm(forms.ModelForm):
     class Meta:
         model = Pizza
-        fields = ["size",
+        fields = [
+                  "size",
                   "crust",
                   "sauce",
                   "cheese",
                   "toppings"
                   ]
         widgets = {
+            'size': forms.Select(attrs={'class': 'pizza-dropdown'}),
+            'crust': forms.Select(attrs={'class': 'pizza-dropdown'}),
+            'sauce': forms.Select(attrs={'class': 'pizza-dropdown'}),
+            'cheese': forms.Select(attrs={'class': 'pizza-dropdown'}),
             'toppings': forms.CheckboxSelectMultiple()
         }
 
@@ -34,3 +39,11 @@ class DeliveryForm(forms.ModelForm):
     class Meta:
         model = Delivery
         fields = ['name', 'address', 'cardNo', 'expMonth', 'expYear', 'cvv']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'delivery-text-box'}),
+            'address': forms.TextInput(attrs={'class': 'delivery-text-box'}),
+            'cardNo': forms.TextInput(attrs={'class': 'delivery-text-box'}),
+            'expMonth': forms.TextInput(attrs={'class': 'delivery-text-box'}),
+            'expYear': forms.TextInput(attrs={'class': 'delivery-text-box'}),
+            'cvv': forms.TextInput(attrs={'class': 'delivery-text-box'})
+        }
