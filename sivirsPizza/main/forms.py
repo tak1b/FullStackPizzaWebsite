@@ -7,22 +7,6 @@ from main.forms import *
 from main.models import *
 
 class RegisterForm(UserCreationForm):
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    email = forms.EmailField()
-
-    password1 = forms.CharField(
-        label= ("Password"),
-        strip=False,
-        widget=forms.PasswordInput,
-    )
-
-    password2 = forms.CharField(
-        label= ("Confirm Password"),
-        widget=forms.PasswordInput,
-        strip=False,
-    )
-
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
