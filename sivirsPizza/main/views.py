@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm 
 from django.contrib.auth.decorators import login_required
@@ -111,7 +111,7 @@ def delivery_page(request):
 @login_required(login_url='/login') 
 def my_orders(request):
     user_pizzas = Pizza.objects.filter(author=request.user)
-    deliveries = Delivery.objects.filter(author=request.user, pizza=user_pizzas.id)
+    deliveries = Delivery.objects.filter(author=request.user)
 
     return render(request, 'my_orders.html', {'deliveries': deliveries, "pizzas" : user_pizzas})
 
