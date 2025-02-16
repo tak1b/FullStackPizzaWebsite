@@ -22,7 +22,7 @@ def register(response):
         form = RegisterForm(response.POST)
         if form.is_valid():
             form.save()
-        return redirect("/register")
+        return redirect("/")
     else:
         form = RegisterForm()
     return render(response, "register.html", {"form":form})
@@ -58,10 +58,19 @@ def order(request):
         if form.is_valid():
             pizza = form.save(commit=False)
             pizza.author = request.user
-            pizza.save()
+            pizza.save()  # Save pizza first (before ManyToMany field)
 
-            request.session['pending_pizza_id'] = pizza.id
-            return redirect('/delivery')
+            form.save_m2m()  # 🔥 This ensures ManyToManyField (toppings) is saved
+
+            # Store pizza ID in session for later delivery
+            pending_pizza_ids = request.session.get('pending_pizza_ids', [])
+            pending_pizza_ids.append(pizza.id)
+            request.session['pending_pizza_ids'] = pending_pizza_ids
+
+            # Redirect to continue shopping or checkout
+            if 'add_another' in request.POST:
+                return redirect('order')
+            return redirect('delivery')
         else:
             return render(request, 'order.html', {'form': form, "toppings": toppings})
 
@@ -71,8 +80,8 @@ def order(request):
 
 @login_required(login_url='/login') 
 def delivery_page(request):
-    pizza_id = request.session.get('pending_pizza_id')
-    if not pizza_id:
+    pizza_ids = request.session.get('pending_pizza_ids', [])
+    if not pizza_ids:
         messages.error(request, "Please create a pizza order first")
         return redirect('order')
 
@@ -81,15 +90,19 @@ def delivery_page(request):
         if form.is_valid():
             delivery = form.save(commit=False)
             delivery.author = request.user
-            
-            pizza = Pizza.objects.get(id=pizza_id)
-            delivery.pizza = pizza
             delivery.save()
             
-            del request.session['pending_pizza_id']
+            # Associate all pending pizzas with this delivery
+            for pizza_id in pizza_ids:
+                pizza = Pizza.objects.get(id=pizza_id)
+                pizza.delivery = delivery
+                pizza.save()
             
-            messages.success(request, "Your pizza order has been placed successfully!")
-            return redirect('/')
+            # Clear the session
+            del request.session['pending_pizza_ids']
+            
+            messages.success(request, "Your pizza orders have been placed successfully!")
+            return redirect('/confirmation')
     else:
         form = DeliveryForm()
     
@@ -99,3 +112,9 @@ def delivery_page(request):
 def my_orders(request):
     deliveries = Delivery.objects.filter(author=request.user).select_related('pizza')
     return render(request, 'my_orders.html', {'deliveries': deliveries})
+
+def confirmation(request):
+    orders   = Pizza.objects.all().filter(author=request.user)
+    delivery = Delivery.objects.all().filter(author=request.user)
+    
+    return render(request, 'confirmation.html', {'orders' : orders, "delivery" : delivery})

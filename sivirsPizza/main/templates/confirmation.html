@@ -1,0 +1,86 @@
+<!-- confirmation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/confirmation.css' %}">
+    <title>Order Confirmation</title>
+</head>
+
+<body>
+    <div class="homePage">
+        <div class="homeTitle">
+            <h2>Go back to profile page?</h2>
+            <a href="/"><button class="btn">Click here</button></a>
+        </div>
+    </div>
+
+    <div class="confirmation-container">
+        <div class="order-header">
+            <div class="divider"></div>
+            <h1>Order Confirmed</h1>
+            <div class="divider"></div>
+        </div>
+
+        <div class="order-details">
+            <div class="order-box">
+                {% for d in orders %}
+                {% if forloop.last %}
+                <h1>Order Summary</h1>
+                <div>
+                    <b>Date Ordered:</b> {{ d.date }}
+                </div>
+                <div>
+                    <b>Pizza Size:</b> {{ d.size }}
+                </div>
+                <div>
+                    <b>Crust Type:</b> {{ d.crust }}
+                </div>
+                <div>
+                    <b>Sauce:</b> {{ d.sauce }}
+                </div>
+                <div>
+                    <b>Cheese:</b> {{ d.cheese }}
+                </div>
+                <div>
+                    <b>Toppings:</b>
+                    {% for topping in d.toppings.all %}
+                        {{ topping.topping }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        None
+                    {% endfor %}
+                </div>
+                
+                        
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="order-box">
+                {% for d in delivery %}
+                {% if forloop.last %}
+                <h1>Delivery Details</h1>
+                <div>
+                    <b>Name:</b> {{ d.name }}
+                </div>
+                <div>
+                    <b>Address:</b> {{ d.address }}
+                </div>
+                <div>
+                    <b>Card Number:</b> •••• {{ d.cardNo|slice:"-4:" }}
+                </div>
+                <div>
+                    <b>Expiry Date:</b> {{ d.expMonth }}/{{ d.expYear }}
+                </div>
+                <div>
+                    <b>CVV:</b> ••• 
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

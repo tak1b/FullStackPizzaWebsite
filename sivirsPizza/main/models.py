@@ -119,7 +119,7 @@ YEAR_CHOICES = tuple((year, year) for year in range(2022, 2050))
 
 class Delivery(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    pizza = models.OneToOneField('Pizza', on_delete=models.CASCADE, null=True)
+    pizza = models.ForeignKey('Pizza', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
     cardNo = models.IntegerField()
