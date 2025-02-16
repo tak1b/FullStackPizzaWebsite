@@ -36,6 +36,31 @@ class PizzaForm(forms.ModelForm):
         }
 
 class DeliveryForm(forms.ModelForm):
+    MONTH_CHOICES = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
+
+    expMonth = forms.ChoiceField(
+        choices=MONTH_CHOICES, 
+        widget=forms.Select(attrs={'class': 'delivery-dropdown', 'autocomplete': 'off'})
+)
+
+    expYear = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'delivery-text-box', 'autocomplete': 'off'})
+)
+
+
     class Meta:
         model = Delivery
         fields = ['name', 'address', 'cardNo', 'expMonth', 'expYear', 'cvv']
@@ -43,7 +68,6 @@ class DeliveryForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'delivery-text-box'}),
             'address': forms.TextInput(attrs={'class': 'delivery-text-box'}),
             'cardNo': forms.TextInput(attrs={'class': 'delivery-text-box'}),
-            'expMonth': forms.TextInput(attrs={'class': 'delivery-text-box'}),
             'expYear': forms.TextInput(attrs={'class': 'delivery-text-box'}),
             'cvv': forms.TextInput(attrs={'class': 'delivery-text-box'})
         }

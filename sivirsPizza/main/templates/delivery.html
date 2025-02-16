@@ -9,94 +9,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6978/6978255.png">
     <link rel="stylesheet" href="{% static 'css/delivery.css' %}">
-
-    <!-- ############## Font Choices from Google ########################## -->
-
-    <!-- ##### LIBRE FRANKLIN #####  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Roboto:wght@700&display=swap"
-        rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
     {% include 'base.html' %}
     
     {% block content %}
         <div class="order-container">
             <div class="order-box">
-                <h1>
-                    Delivery Information
-                </h1>
+                <h1>Delivery Information</h1>
                 <br>
 
                 <form action="" method="post">
                     {% csrf_token %}
 
-                    <div class="delivery-box">
+                    <!-- Error Message Section -->
+                    {% if form.errors %}
+                        <div class="error-messages" style="color: red; margin-bottom: 10px;">
+                            <ul>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li><strong>{{ field|title }}:</strong> {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
 
-                        <div class="delivery-box-name">
-                            {{ form.name.label_tag }}
-                        </div>
-                        <div class="delivery-box-text-box">
-                            {{ form.name }}
-                        </div>
+                    <div class="delivery-box">
+                        <div class="delivery-box-name">{{ form.name.label_tag }}</div>
+                        <div class="delivery-box-text-box">{{ form.name }}</div>
                     </div>
 
                     <div class="delivery-box">
-
-                        <div class="delivery-box-name">
-                            {{ form.address.label_tag }}
-                        </div>
-                        <div class="delivery-box-text-box">
-                            {{ form.address }}
-                        </div>
+                        <div class="delivery-box-name">{{ form.address.label_tag }}</div>
+                        <div class="delivery-box-text-box">{{ form.address }}</div>
                     </div>
 
                     <div class="delivery-box">
-
-                        <div class="delivery-box-name">
-                            Card No:
-                        </div>
-                        <div class="delivery-box-text-box">
-                            {{ form.cardNo }}
-                        </div>
+                        <div class="delivery-box-name">Card No:</div>
+                        <div class="delivery-box-text-box">{{ form.cardNo }}</div>
                     </div>
 
                     <div class="delivery-box">
-
-                        <div class="delivery-box-name">
-                            Exp. Mon: 
-                        </div>
-                        <div class="delivery-box-text-box">
-                            {{ form.expMonth }}
-                        </div>
+                        <div class="delivery-box-name">Exp. Mon:</div>
+                        <div class="delivery-box-text-box">{{ form.expMonth }}</div>
                     </div>
 
                     <div class="delivery-box">
-
-                        <div class="delivery-box-name">
-                            Exp. Year:
-                        </div>
-                        <div class="delivery-box-text-box">
-                            {{ form.expYear }}
-                        </div>
+                        <div class="delivery-box-name">Exp. Year:</div>
+                        <div class="delivery-box-text-box">{{ form.expYear }}</div>
                     </div>
 
                     <div class="delivery-box">
-
-                        <div class="delivery-box-name">
-                            Sec. No. 
-                        </div>
-                        <div class="delivery-box-text-box">
-                            {{ form.cvv }}
-                        </div>
+                        <div class="delivery-box-name">Sec. No.</div>
+                        <div class="delivery-box-text-box">{{ form.cvv }}</div>
                     </div>
 
                     <button type="submit" class="submit-button">Create Pizza</button>
