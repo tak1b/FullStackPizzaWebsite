@@ -110,9 +110,9 @@ def delivery_page(request):
 
 @login_required(login_url='/login') 
 def my_orders(request):
-
     deliveries = Delivery.objects.filter(author=request.user).select_related('pizza')
-    return render(request, 'my_orders.html', {'deliveries': deliveries})
+    user_pizzas = Pizza.objects.filter(author=request.user)
+    return render(request, 'my_orders.html', {'deliveries': deliveries, "pizzas" : user_pizzas})
 
 def confirmation(request):
     orders   = Pizza.objects.all().filter(author=request.user)
