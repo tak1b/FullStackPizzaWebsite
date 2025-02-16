@@ -4,28 +4,26 @@
 <h1>My Orders</h1>
 
 {% for delivery in deliveries %}
-    <div class="order-card">
-        <h2>Order #{{ delivery.id }}</h2>
+    <div class="order-item">
+        <h3>Delivery #{{ delivery.id }}</h3>
+        <p>Delivery Address: {{ delivery.address }}</p>
+        <p>Order Date: {{ delivery.created_at }}</p>
 
-        {% with pizzas=delivery.pizza_set.all %}
-            {% if pizzas %}
-                {% for pizza in pizzas %}
-                    <p><b>Pizza Type:</b> {{ pizza.size }} - {{ pizza.crust }}</p>
-                    <p><b>Toppings:</b> 
-                        {% for topping in pizza.toppings.all %}
-                            {{ topping.topping }}{% if not forloop.last %}, {% endif %}
-                        {% empty %}
-                            None
-                        {% endfor %}
-                    </p>
-                {% endfor %}
-            {% else %}
-                <p>No pizzas in this order.</p>
-            {% endif %}
-        {% endwith %}
+        <br />
+        <h4>Pizza Details: {{delivery.pizza.size}}</h4>
         
-        <p><b>Delivery Address:</b> {{ delivery.address }}</p>
-        <p><b>Order Date:</b> {{ delivery.date }}</p>
+        {% for pizza in pizzas %}
+            <div class="pizza-details">
+                <h4>Pizza Details: {{pizza.crust}} </h4>
+                <p>Size: {{ pizza.size }}</p>
+                <p>Toppings:</p>
+                <ul>
+                    {% for topping in pizza.toppings.all %}
+                        <li>{{ topping.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
     </div>
 {% empty %}
     <p>No orders found.</p>
