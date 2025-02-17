@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
+
 <h1>My Orders</h1>
+<a href="{% url 'index' %}" class="home-button">Return to Home</a>
 
 {% for delivery in deliveries %}
     <div class="order-item">
@@ -29,4 +33,25 @@
     <p>No orders found.</p>
 {% endfor %}
 
+<style>
+    .home-button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #ffcc00;
+        color: #000;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        margin: 20px 0;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .home-button:hover {
+        background-color: #000;
+        color: #ffcc00;
+        border-color: #ffcc00;
+        transform: translateY(-2px);
+    }
+</style>
 {% endblock %}
